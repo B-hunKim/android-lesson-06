@@ -24,7 +24,8 @@ public class UserDataEndpoint {
 
     // 원래대로라면 리스트를 통해 JSON에서 사용할 수 있는 형태로 변환해야 하지만, 이번 실습에서는 건너뜁니다.
     @PostMapping("/remove")
-    public ResponseEntity<String> removeUser() {
-        throw new RuntimeException("이곳에 유저를 삭제하는 코드를 작성하십시오.");
+    public ResponseEntity<String> removeUser(@RequestBody RemoveUserDto removeUser) {
+        userDataService.deleteUser(removeUser.getUserId());
+        return ResponseEntity.ok().body(removeUser.getUserId());
     }
 }
